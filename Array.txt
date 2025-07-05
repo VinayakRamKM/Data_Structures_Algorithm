@@ -1,0 +1,73 @@
+class Array:
+    def __init__(self, capacity= 10):
+        self.data = [None] * capacity
+        self.capacity = capacity
+        self.size = 0
+        
+    def insertAtIndex(self, index, ele): 
+        if self.size == self.capacity:
+            print("Array overflow!!!")
+            return
+        if index > self.size:
+            index = self.size
+        for i in range(self.size, index, -1):
+            self.data[i] = self.data[i -1]
+        self.data[index] = ele
+        self.size = self.size + 1
+        
+        
+    def insertAtStart(self, ele):
+        self.insertAtIndex(0, ele)
+        
+    def insertAtLast(self, ele):
+        if self.size == self.capacity:
+            print("Array overflow!!!")
+            return
+        self.data[self.size] = ele
+        self.size += 1
+        
+    def deleteAtIndex(self, index):
+        if self.size == 0:
+            print("Array Underflow!!!!")
+            return
+        deletedValue = self.data[index]
+        for i in range(index, self.size-1):
+            self.data[i] = self.data[i +1]
+            
+        self.data[self.size -1] = None
+        self.size -= 1 
+        return deletedValue
+        
+    
+    def deleteAtStart(self): 
+        return self.deleteAtIndex(0)
+        
+    def deleteAtLast(self):
+        if self.size == 0:
+            print("Array underflow")
+            return
+        deletedValue = self.data[self.size -1]
+        self.data[self.size -1] = None
+        self.size -= 1
+        return deletedValue
+     
+    def len(self):
+        return self.size 
+        
+    def traverseArray(self): 
+        for i in range(self.size):
+            print(self.data[i], end=" ")
+
+if __name__ == "__main__":
+    a1 = Array()
+    a2 = Array(15)
+    print(a1.data)
+    
+    a1.insertAtStart(12)
+    a1.insertAtStart(14)
+    a1.insertAtIndex(1, 16)
+    a1.insertAtLast(20)
+    a1.insertAtIndex(9, 16)
+    print(a1.data)
+
+ 

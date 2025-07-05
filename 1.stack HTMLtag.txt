@@ -1,0 +1,42 @@
+class Empty(Exception):
+    pass
+class ArrayStack:
+    def __init__(self):
+        self._data = []
+        
+    def push(self, e):
+        self._data.append(e)
+    
+    def isEmpty(self):
+        return len(self._data) == 0
+    
+    def __len__(self):
+        return len(self._data)
+    
+    def pop(self):
+        if self.isEmpty():
+            raise Empty("Stack is Empty")
+        return self._data.pop()
+    def top(self):
+        if self.isEmpty():
+            raise Empty("Stack is Empty")
+        return self._data[-1]
+
+def is_matched(htmlCode):
+    stack = ArrayStack() 
+    j = htmlCode.find("<") 
+    
+    while j != -1: 
+        k = htmlCode.find(">", j+1) 
+        if k!= -1: 
+            tag = htmlCode[j+1:k] 
+            
+            if not tag.startswith("/"): 
+                stack.push(tag)
+            elif stack.pop() != tag[1:]: 
+                
+                return False
+        j = htmlCode.find( "<", k+1)  
+    
+    return stack.isEmpty() 
+print(is_matched("<HTML> <Body> <P>First HTML Code </P></Body></HTML>"))

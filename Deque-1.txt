@@ -1,0 +1,79 @@
+class DeQue:
+    def __init__(self, capacity = 10):
+        self.data = [None] * capacity 
+        self.capacity = capacity 
+        self.size = 0 
+        self.front = 0 
+        
+    def addLast(self, ele):
+        if self.size == self.capacity:
+            print("Dequeue overflow!!!!!")
+            return
+        
+        rear = (self.front + self.size) % self.capacity 
+        
+        self.data[rear] = ele 
+        self.size = self.size + 1 
+        
+    def deleteFirst(self):    
+        if self.size == 0:
+            print("Dequeue underflow!!!")
+            return 
+        
+        deletedValue = self.data[self.front]
+        self.data[self.front] = None
+        self.front = (self.front + 1) % self.capacity 
+        self.size  = self.size - 1 
+        return deletedValue 
+        
+    def addFirst(self, ele):
+        if self.size == self.capacity:
+            print("Dequeue Overflow!!!")
+            return 
+        self.data[self.front - 1] = ele 
+        self.front = (self.front - 1) % self.capacity
+        self.size = self.size + 1  
+        
+    def deleteLast(self):
+        if self.size == 0:
+            print("Deque Underflow!!!!")
+            return
+        rear = (self.front + self.size) % self.capacity
+        deletedValue = self.data[rear - 1]
+        self.data[rear - 1] = None 
+        self.size = self.size - 1 
+        return deletedValue
+        
+        
+    def first(self):
+        if self.size == 0:
+            print("Deque underflow!!!")
+            return
+        return self.data[self.front] 
+        
+        
+    def last(self):
+        if self.size == 0:
+            print("Dequeue underflow!!!")
+            return 
+        rear = (self.front + self.size) % self.capacity
+        
+        return self.data[rear - 1]
+    
+    def isEmpty(self):
+        return self.size == 0
+        
+    def __len__(self):
+        return self.size
+if  __name__ == "__main__":
+    DQ = DeQue(5)
+    DQ.addLast(10)
+    print("Dequeued Value: ", DQ.deleteFirst())
+    DQ.addFirst(90)
+    print(DQ.data)
+    print("First element: ", DQ.first())
+    print("Last element: ", DQ.last())
+    print("Dequeued Value: ", DQ.deleteLast())
+    print(DQ.data)
+    print("Is Empty: ", DQ.isEmpty())
+    print("Length: ", len(DQ))

@@ -1,0 +1,42 @@
+class Full(Exception):
+    pass 
+class Empty(Exception):
+    pass
+class ArrayQueue:
+    def __init__(self, capacity = 10):
+        self.data = [None] * capacity 
+        self.front = 0 
+        self.size = 0 
+        self.capacity = capacity
+    def isEmpty(self):
+        return self.size == 0 
+    def __len__(self):
+        return self.size 
+    def frontElement(self):
+        if self.isEmpty():
+            raise Empty("Queue underflow")
+        return self.data[self.front]
+    def enqueue(self, element):
+        if self.size == self.capacity:
+            raise Full("Queue Overflow!!!")
+        
+        avail = (self.front + self.size) % self.capacity 
+        self.data[avail] = element 
+        self.size += 1 
+    def dequque(self):
+        if self.isEmpty():
+            print("Queue underflow!!!")
+            return 
+        answer = self.data[self.front]
+        self.data[self.front] = None 
+        self.front = (self.front+1) % self.capacity
+        self.size = self.size - 1
+        return answer
+if __name__ == "__main__":
+    q1 = ArrayQueue(5) 
+    q1.enqueue(10)
+    q1.enqueue(20) 
+    print(q1.dequque())
+    q1.enqueue(40)
+    print(q1.data)
+    print(q1.frontElement()) 

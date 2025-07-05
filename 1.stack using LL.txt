@@ -1,0 +1,41 @@
+class Empty(Exception):
+    pass
+class Empty(Exception):
+    pass
+class LinkedListStack:
+    def __init__(self): 
+       self._head = None   
+       self._size = 0    
+    class Node:
+        __slots__ = "element" , "next"  
+        def __init__(self, element = None, next = None):   
+            self.element = element  
+            self.next = next        
+    def __init__(self):
+       self._head = None   
+       self._size = 0      
+    def isEmpty(self):
+        return self._size ==0   
+    def __len__(self):
+        return self._size     
+    def push(self, e):
+        newNode = self.Node(e, self._head) 
+        self._head = newNode  
+        self._size = self._size + 1
+    def pop(self):
+        if self.isEmpty(): 
+            raise Empty("stack is empty")
+        answer = self._head.element 
+        self._head = self._head.next 
+        self._size = self._size - 1
+        return answer
+    def top(self):
+        if self.isEmpty(): 
+            raise Empty("stack is empty")
+        answer = self._head.element 
+        return answer
+l1 = LinkedListStack()
+print(l1.push(10))
+print(len(l1))
+print(l1.top())
+print(l1.pop())

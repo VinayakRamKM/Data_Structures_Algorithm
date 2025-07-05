@@ -1,0 +1,45 @@
+class EmptyException(Exception):
+    pass
+
+class ArrayStack:
+    def __init__(self):
+        self.data = [] 
+    
+    def push(self, ele):
+        self.data.append(ele)
+        
+    def pop(self):
+        if self.isEmpty():
+            raise EmptyException("Stack Underflow!!!")
+        return self.data.pop()
+        
+    
+    def isEmpty(self):
+        return len(self.data) ==0
+        
+    def top(self):
+        if self.isEmpty():
+            raise EmptyException("Stack Underflow!!!")
+        return self.data[-1] 
+        
+    def __len__(self):
+        return len(self.data)
+ 
+ 
+ 
+def reverseList(list1):
+    s1 = ArrayStack()
+    
+    length = len(list1)
+    for i in range(length):
+        s1.push(list1.pop(0))
+    for i in range(length):
+        list1.append(s1.pop()) 
+    return list1
+    
+if __name__ == "__main__":
+    list1 = [10, 20, 30, 40, 50]
+    list1 = reverseList(list1)
+    print(list1)
+
+    

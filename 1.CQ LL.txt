@@ -1,0 +1,58 @@
+class Node:
+    def __init__(self, data = None, next = None):
+        self.data = data
+        self.next = next
+class CircularQueue:
+    def __init__(self):
+        self.tail = None 
+        self.size = 0 
+    def enqueue(self, ele):
+        newNode = Node(ele) 
+        if newNode == None:
+            print("couldn't create new node!!!")
+            return 
+        if self.size == 0: #inserting a new node into empty linked list
+            newNode.next = newNode 
+        else:
+            newNode.next = self.tail.next
+            self.tail.next = newNode 
+        self.tail = newNode 
+        self.size = self.size + 1 
+    def dequeue(self): 
+        if self.size == 0:
+            print("Queue underflow!!!")
+            return
+        head = self.tail.next 
+        deletedValue = head.data 
+        if self.size == 1:
+            self.tail = None 
+        else:
+            self.tail.next = head.next 
+        self.size = self.size - 1 
+        return deletedValue
+    def rotate(self):
+        if self.size > 0:
+            self.tail = self.tail.next
+    def isEmpty(self):
+        return self.size == 0
+    def __len__(self):
+        return self.size 
+    def first():
+        if self.size == 0:
+            print("Queue underflow!!!")
+            return
+        head = self.tail.next 
+        return head.data
+    def traverseCircularLinkedList(self):
+        currentNode = self.tail.next 
+        for i in range(self.size):
+            print(currentNode.data)
+            currentNode = currentNode.next 
+if __name__ == "__main__":
+    CQ = CircularQueue() 
+    CQ.enqueue(12)
+    CQ.enqueue(14)
+    CQ.rotate()
+    CQ.traverseCircularLinkedList()
+    print("Dequeued Value: ", CQ.dequeue())
+    CQ.traverseCircularLinkedList()

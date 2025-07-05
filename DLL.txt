@@ -1,0 +1,61 @@
+class Node:
+    def __init__(self,data = None, prev = None, next = None):
+        self.data = data 
+        self.prev = prev 
+        self.next = next
+
+class DoublyLinkedList:
+    def __init__(self):
+        self.header = Node()
+        self.trailer = Node() 
+        self.header.next = self.trailer 
+        self.trailer.prev = self.header
+        self.size = 0 
+     
+ 
+        
+    def insert_between(self, ele, predecessor, successor):
+        newNode = Node(ele, predecessor, successor)
+        if newNode == None:
+            print("couldn't create newNode!!!!")
+            return 
+        predecessor.next = newNode 
+        successor.prev = newNode 
+        self.size = self.size + 1 
+        return newNode
+        
+    def forwardTraversal(self):
+        currentNode = self.header.next 
+        for i in range(self.size):
+            print(currentNode.data)
+            currentNode = currentNode.next
+            
+    def backwardTraversal(self):
+        currentNode = self.trailer.prev 
+        for i in range(self.size):
+            print(currentNode.data)
+            currentNode = currentNode.prev
+    
+    def deleteGivenNode(self, deleteNode):
+        deletedValue = deleteNode.data 
+        predecessor = deleteNode.prev 
+        successor = deleteNode.next 
+        predecessor.next = successor
+        successor.prev = predecessor 
+        deleteNode.prev = None 
+        deleteNode.next = None 
+        self.size = self.size - 1 
+        return deletedValue
+        
+        
+        
+if __name__ == "__main__":   
+    DLL = DoublyLinkedList() 
+    node1 = DLL.insert_between(12, DLL.header, DLL.trailer)
+    node2 = DLL.insert_between(13, DLL.header, node1)
+    node3 = DLL.insert_between(15, node1, DLL.trailer)
+    print("Deleted val;ue is : ",DLL.deleteGivenNode(node2))
+    DLL.forwardTraversal()
+    print("Backward traversal:")
+    DLL.backwardTraversal()
+    

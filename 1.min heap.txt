@@ -1,0 +1,38 @@
+import heapq
+class MinHeap:
+    def __init__(self):
+        self.heap = []
+    def insert(self, value):
+        heapq.heappush(self.heap, value)
+        print(f"Inserted {value}, Heap: {self.heap}")
+    def extract_min(self):
+        if self.is_empty():
+            print("Heap is empty!")
+            return None
+        min_value = heapq.heappop(self.heap)
+        print(f"Extracted {min_value}, Heap: {self.heap}")
+        return min_value
+    def get_min(self):
+        if self.is_empty():
+            print("Heap is empty!")
+            return None
+        print(f"Minimum value: {self.heap[0]}")
+        return self.heap[0]
+    def is_empty(self):
+        """Check if the heap is empty."""
+        return len(self.heap) == 0
+# Usage example
+if __name__ == "__main__":
+    min_heap = MinHeap()
+    # Insert elements into the heap
+    min_heap.insert(10)
+    min_heap.insert(5)
+    min_heap.insert(20)
+    min_heap.insert(1)
+    # Get the smallest element
+    min_heap.get_min()
+    # Extract elements from the heap
+    min_heap.extract_min()
+    min_heap.extract_min()
+    # Final state of the heap
+    print(f"Final Heap: {min_heap.heap}")
